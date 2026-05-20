@@ -1,0 +1,10 @@
+build/
+cmake-build-*/
+.qtcreator/
+*.user
+*.autosave
+.DS_Store
+EulerPathVisualizer
+euler_tests
+gui_screenshots
+
