@@ -70,7 +70,7 @@ void setInput(MainWindow& window, int vertexCount, const QString& edgeText) {
 void saveWindow(MainWindow& window, const QString& fileName) {
     processEvents(120);
     const QPixmap pixmap = window.grab();
-    const QString path = QDir(QString::fromUtf8(PROJECT_SOURCE_DIR)).filePath(fileName);
+    const QString path = QDir(QString::fromUtf8(PROJECT_SOURCE_DIR)).filePath("docs/screenshots/" + fileName);
     if (!pixmap.save(path)) {
         throw std::runtime_error(("截图保存失败：" + path).toStdString());
     }

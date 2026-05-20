@@ -33,16 +33,22 @@
 ```text
 .
 ├── CMakeLists.txt
-├── main.cpp
-├── graph.h / graph.cpp
-├── euler_solver.h / euler_solver.cpp
-├── graph_widget.h / graph_widget.cpp
-├── main_window.h / main_window.cpp
+├── src/
+│   ├── app/
+│   │   └── main.cpp
+│   ├── core/
+│   │   ├── graph.h / graph.cpp
+│   │   └── euler_solver.h / euler_solver.cpp
+│   └── ui/
+│       ├── graph_widget.h / graph_widget.cpp
+│       └── main_window.h / main_window.cpp
 ├── tests/
 │   ├── test_euler_solver.cpp
 │   └── capture_gui_screenshots.cpp
-├── TEST_CASES.md
-└── test_results.md
+└── docs/
+    ├── TEST_CASES.md
+    ├── test_results.md
+    └── screenshots/
 ```
 
 ## 构建运行
@@ -67,5 +73,4 @@ ctest --test-dir build --output-on-failure
 - 固定代表性测试用例，用于课程论文展示；
 - 1000 组随机图批量测试，用于验证算法稳定性。
 
-测试结果见 [test_results.md](test_results.md)。
-
+测试结果见 [docs/test_results.md](docs/test_results.md)。

@@ -323,7 +323,7 @@ void writeResultsMarkdown(const std::vector<FixedCaseResult>& fixedResults,
                           int randomPassed,
                           std::uint32_t seed,
                           const RandomFailure& failure) {
-    const std::string outputPath = std::string(PROJECT_SOURCE_DIR) + "/test_results.md";
+    const std::string outputPath = std::string(PROJECT_SOURCE_DIR) + "/docs/test_results.md";
     std::ofstream out(outputPath);
 
     out << "# 一笔画问题算法测试结果\n\n";
@@ -412,7 +412,7 @@ int main() {
     }
 
     writeResultsMarkdown(fixedResults, randomTotal, randomPassed, seed, failure);
-    std::cout << "\n测试报告已写入：" << PROJECT_SOURCE_DIR << "/test_results.md\n";
+    std::cout << "\n测试报告已写入：" << PROJECT_SOURCE_DIR << "/docs/test_results.md\n";
 
     return allFixedPassed && !failure.hasFailure ? 0 : 1;
 }

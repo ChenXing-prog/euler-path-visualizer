@@ -14,27 +14,41 @@ set(CMAKE_AUTOMOC ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
-add_executable(EulerPathVisualizer
-    main.cpp
-    graph.h
-    graph.cpp
-    euler_solver.h
-    euler_solver.cpp
-    graph_widget.h
-    graph_widget.cpp
-    main_window.h
-    main_window.cpp
+set(CORE_SOURCES
+    src/core/graph.h
+    src/core/graph.cpp
+    src/core/euler_solver.h
+    src/core/euler_solver.cpp
 )
 
+set(UI_SOURCES
+    src/ui/graph_widget.h
+    src/ui/graph_widget.cpp
+    src/ui/main_window.h
+    src/ui/main_window.cpp
+)
+
+add_executable(EulerPathVisualizer
+    src/app/main.cpp
+    ${CORE_SOURCES}
+    ${UI_SOURCES}
+)
+
+target_include_directories(EulerPathVisualizer PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui
+)
 target_link_libraries(EulerPathVisualizer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 add_executable(euler_tests
     tests/test_euler_solver.cpp
-    graph.cpp
-    euler_solver.cpp
+    src/core/graph.cpp
+    src/core/euler_solver.cpp
 )
 
-target_include_directories(euler_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(euler_tests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+)
 target_compile_definitions(euler_tests PRIVATE PROJECT_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
 enable_testing()
@@ -43,12 +57,13 @@ set_tests_properties(EulerSolverTests PROPERTIES WORKING_DIRECTORY ${CMAKE_CURRE
 
 add_executable(gui_screenshots
     tests/capture_gui_screenshots.cpp
-    graph.cpp
-    euler_solver.cpp
-    graph_widget.cpp
-    main_window.cpp
+    ${CORE_SOURCES}
+    ${UI_SOURCES}
 )
 
-target_include_directories(gui_screenshots PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(gui_screenshots PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui
+)
 target_compile_definitions(gui_screenshots PRIVATE PROJECT_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 target_link_libraries(gui_screenshots PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
